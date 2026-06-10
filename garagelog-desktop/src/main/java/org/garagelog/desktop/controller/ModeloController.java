@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.garagelog.desktop.api.ApiClient;
@@ -87,6 +88,7 @@ public class ModeloController {
             stage.initModality(Modality.WINDOW_MODAL);
             stage.initOwner(modelosTable.getScene().getWindow());
             stage.setTitle(m == null ? "Nuevo Modelo" : "Editar Modelo");
+            stage.getIcons().add(new Image(getClass().getResourceAsStream("/org/garagelog/desktop/GarageLog_desktop_logo.png")));
             stage.setScene(scene);
             stage.showAndWait();
             cargar();

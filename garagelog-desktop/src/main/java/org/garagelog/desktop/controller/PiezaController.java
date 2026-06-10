@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.garagelog.desktop.api.ApiClient;
@@ -83,6 +84,7 @@ public class PiezaController {
             stage.initModality(Modality.WINDOW_MODAL);
             stage.initOwner(piezasTable.getScene().getWindow());
             stage.setTitle(p == null ? "Nueva Pieza" : "Editar Pieza");
+            stage.getIcons().add(new Image(getClass().getResourceAsStream("/org/garagelog/desktop/GarageLog_desktop_logo.png")));
             stage.setScene(scene);
             stage.showAndWait();
             cargar();

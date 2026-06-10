@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.garagelog.desktop.api.ApiClient;
@@ -101,6 +102,7 @@ public class MantenimientoController {
             stage.initModality(Modality.WINDOW_MODAL);
             stage.initOwner(mantenimientosTable.getScene().getWindow());
             stage.setTitle("Nuevo Mantenimiento - " + vehiculo.getMatricula());
+            stage.getIcons().add(new Image(getClass().getResourceAsStream("/org/garagelog/desktop/GarageLog_desktop_logo.png")));
             stage.setScene(scene);
             stage.showAndWait();
             cargarMantenimientos();

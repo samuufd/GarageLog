@@ -26,9 +26,4 @@ class ServerConfig {
 
   static bool get hasCustomIp => _ip != _defaultIp;
 
-  static Future<void> clear() async {
-    _ip = _defaultIp;
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.remove(_key);
-  }
 }

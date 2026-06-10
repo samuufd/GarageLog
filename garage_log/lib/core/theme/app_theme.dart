@@ -5,16 +5,13 @@ class AppTheme {
 
   // Light palette
   static const Color primary = Color(0xFF1E293B);
-  static const Color primaryLight = Color(0xFF334155);
   static const Color accent = Color(0xFFF59E0B);
-  static const Color accentLight = Color(0xFFFCD34D);
   static const Color surface = Color(0xFFF8F6F3);
   static const Color card = Color(0xFFFFFDFA);
   static const Color textPrimary = Color(0xFF0F172A);
   static const Color textSecondary = Color(0xFF64748B);
   static const Color textTertiary = Color(0xFF94A3B8);
   static const Color divider = Color(0xFFE8E4DF);
-  static const Color success = Color(0xFF10B981);
   static const Color error = Color(0xFFEF4444);
 
   // Dark palette (neutral gray)
@@ -43,19 +40,6 @@ class AppTheme {
   static BoxDecoration cardDecoration(bool isDark) => BoxDecoration(
         color: isDark ? AppTheme.darkCard : AppTheme.card,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-            color: isDark ? AppTheme.darkDivider : AppTheme.divider),
-        boxShadow: isDark ? null : AppTheme.cardShadow,
-      );
-
-  static BoxDecoration cardWithAccentBar(bool isDark) => BoxDecoration(
-        color: isDark ? AppTheme.darkCard : AppTheme.card,
-        borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(12),
-          bottomLeft: Radius.circular(12),
-          topRight: Radius.circular(12),
-          bottomRight: Radius.circular(12),
-        ),
         border: Border.all(
             color: isDark ? AppTheme.darkDivider : AppTheme.divider),
         boxShadow: isDark ? null : AppTheme.cardShadow,
