@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox stylesheets="@styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="org.garagelog.desktop.controller.MantenimientoController"
+      spacing="10" minWidth="600" minHeight="400">
+    <padding>
+        <Insets top="15" right="15" bottom="15" left="15"/>
+    </padding>
+
+    <Label fx:id="tituloLabel" styleClass="titulo-seccion"/>
+
+    <SplitPane orientation="VERTICAL" VBox.vgrow="ALWAYS">
+        <TableView fx:id="mantenimientosTable">
+            <columnResizePolicy>
+                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+            </columnResizePolicy>
+            <columns>
+                <TableColumn text="ID" fx:id="colId"/>
+                <TableColumn text="Fecha" fx:id="colFecha"/>
+                <TableColumn text="KM" fx:id="colKm"/>
+                <TableColumn text="Coste Total" fx:id="colCoste"/>
+                <TableColumn text="Observaciones" fx:id="colObs"/>
+            </columns>
+        </TableView>
+        <VBox spacing="8">
+            <padding>
+                <Insets top="5"/>
+            </padding>
+            <Label text="Piezas del mantenimiento seleccionado" style="-fx-font-weight: bold;"/>
+            <TableView fx:id="piezasTable" VBox.vgrow="ALWAYS">
+                <columnResizePolicy>
+                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+                </columnResizePolicy>
+                <columns>
+                    <TableColumn text="Pieza" fx:id="colPiezaId"/>
+                    <TableColumn text="Cantidad" fx:id="colCantidad"/>
+                    <TableColumn text="Precio Unitario" fx:id="colPrecio"/>
+                    <TableColumn text="Observaciones" fx:id="colPiezaObs"/>
+                </columns>
+            </TableView>
+        </VBox>
+    </SplitPane>
+
+    <HBox spacing="8" alignment="CENTER_LEFT">
+        <Button text="Nuevo Mantenimiento" styleClass="btn-primary" onAction="#onNuevoMantenimiento"/>
+        <Button fx:id="eliminarBtn" text="Eliminar Mantenimiento" styleClass="btn-danger" onAction="#onEliminarMantenimiento"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button text="Cerrar" onAction="#onCerrar"/>
+    </HBox>
+</VBox>

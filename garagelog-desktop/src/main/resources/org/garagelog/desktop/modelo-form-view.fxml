@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+
+<VBox stylesheets="@styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="org.garagelog.desktop.controller.ModeloFormController"
+      spacing="12" minWidth="380" prefWidth="420" prefHeight="515" minHeight="480">
+    <padding>
+        <Insets top="15" right="15" bottom="15" left="15"/>
+    </padding>
+
+    <Label fx:id="tituloLabel" text="Nuevo Modelo" styleClass="titulo-seccion"/>
+
+    <GridPane hgap="8" vgap="8">
+        <columnConstraints>
+            <ColumnConstraints minWidth="90" halignment="RIGHT"/>
+            <ColumnConstraints hgrow="ALWAYS" minWidth="200"/>
+        </columnConstraints>
+
+        <Label text="Marca" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+        <TextField fx:id="marcaField" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+        <Label text="Modelo" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+        <TextField fx:id="modeloField" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+        <Label text="Año" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+        <TextField fx:id="anoField" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+        <Label text="Combustible" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+        <ComboBox fx:id="combustibleCombo" editable="true" maxWidth="Infinity"
+                  GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+    </GridPane>
+
+    <Separator/>
+
+    <Label text="Imagen" styleClass="subtitulo"/>
+
+    <HBox spacing="15" alignment="CENTER_LEFT">
+        <ImageView fx:id="imagePreview" fitWidth="200" fitHeight="150"
+                   style="-fx-border-color: #e0e0e0; -fx-border-width: 1;"/>
+        <VBox spacing="8" alignment="CENTER_LEFT">
+            <Label fx:id="imageStatusLabel" text="(sin imagen)"/>
+            <Button text="Seleccionar imagen..." onAction="#onSeleccionarImagen"/>
+            <Button text="Quitar imagen" onAction="#onQuitarImagen"/>
+        </VBox>
+    </HBox>
+
+    <HBox spacing="10" alignment="CENTER_RIGHT">
+        <Button text="Guardar" styleClass="btn-primary" onAction="#onGuardar"/>
+        <Button text="Cancelar" onAction="#onCancelar"/>
+    </HBox>
+</VBox>

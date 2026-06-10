@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>4.0.6</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>com.garagelog</groupId>
+	<artifactId>backend</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>garagelog</name>
+	<description>GarageLog - Vehicle maintenance tracker</description>
+	<url/>
+	<licenses>
+		<license/>
+	</licenses>
+	<developers>
+		<developer/>
+	</developers>
+	<scm>
+		<connection/>
+		<developerConnection/>
+		<tag/>
+		<url/>
+	</scm>
+	<properties>
+		<java.version>17</java.version>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-webmvc</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.mysql</groupId>
+			<artifactId>mysql-connector-j</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-webmvc-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+	<profiles>
+		<profile>
+			<id>exe</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>io.github.jhipster.application</groupId>
+						<artifactId>launch4j-maven-plugin</artifactId>
+						<version>2.5.0</version>
+						<executions>
+							<execution>
+								<id>launch4j</id>
+								<goals>
+									<goal>launch4j</goal>
+								</goals>
+								<phase>package</phase>
+								<configuration>
+									<headerType>console</headerType>
+									<outfile>${project.build.directory}\GarageLog.exe</outfile>
+									<jar>${project.build.directory}\${project.artifactId}-${project.version}.jar</jar>
+									<errTitle>GarageLog</errTitle>
+									<icon>${project.basedir}\src\main\resources\icon.ico</icon>
+									<chdir>.</chdir>
+									<downloadUrl>https://adoptium.net</downloadUrl>
+									<jre>
+										<minVersion>17</minVersion>
+										<bundledJre64Bit>false</bundledJre64Bit>
+										<bundledJreAsFallback>false</bundledJreAsFallback>
+									</jre>
+									<singleInstance>
+										<mutexName>GarageLog</mutexName>
+										<windowTitle>GarageLog</windowTitle>
+									</singleInstance>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
+</project>

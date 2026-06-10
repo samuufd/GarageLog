@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.web.WebView?>
+
+<VBox stylesheets="@styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="org.garagelog.desktop.controller.HelpController"
+      spacing="10" minWidth="700" minHeight="450" prefWidth="850" prefHeight="550">
+    <padding>
+        <Insets top="15" right="15" bottom="15" left="15"/>
+    </padding>
+
+    <Label text="Ayuda de GarageLog Desktop" styleClass="titulo-seccion"/>
+
+    <SplitPane VBox.vgrow="ALWAYS">
+        <TreeView fx:id="navTree" minWidth="200" maxWidth="300" prefWidth="220"/>
+        <WebView fx:id="contentView"/>
+    </SplitPane>
+
+    <HBox spacing="10" alignment="CENTER_RIGHT">
+        <Button text="Cerrar" onAction="#onCerrar"/>
+    </HBox>
+</VBox>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox stylesheets="@styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="org.garagelog.desktop.controller.VehiculoFormController"
+      spacing="12" minWidth="380" prefWidth="420" prefHeight="320" minHeight="300">
+    <padding>
+        <Insets top="15" right="15" bottom="15" left="15"/>
+    </padding>
+
+    <Label fx:id="tituloLabel" text="Nuevo Vehículo" styleClass="titulo-seccion"/>
+
+    <GridPane hgap="8" vgap="8">
+        <columnConstraints>
+            <ColumnConstraints minWidth="100" halignment="RIGHT"/>
+            <ColumnConstraints hgrow="ALWAYS" minWidth="200"/>
+        </columnConstraints>
+
+        <Label text="Modelo" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+        <ComboBox fx:id="modeloCombo" maxWidth="Infinity"
+                  GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+        <Label text="Matrícula" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+        <TextField fx:id="matriculaField" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+        <Label text="KM Iniciales" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+        <TextField fx:id="kmField" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+        <Label text="Fecha Compra" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+        <DatePicker fx:id="fechaPicker" maxWidth="Infinity"
+                    GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+        <Label text="Notas" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+        <TextArea fx:id="notasArea" prefRowCount="3" maxWidth="Infinity"
+                  GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+    </GridPane>
+
+    <HBox spacing="10" alignment="CENTER_RIGHT">
+        <Button text="Guardar" styleClass="btn-primary" onAction="#onGuardar"/>
+        <Button text="Cancelar" onAction="#onCancelar"/>
+    </HBox>
+</VBox>

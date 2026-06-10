@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox stylesheets="@styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="org.garagelog.desktop.controller.ModeloController"
+      spacing="10" minWidth="500" minHeight="350">
+    <padding>
+        <Insets top="15" right="15" bottom="15" left="15"/>
+    </padding>
+
+    <Label text="Gestión de Modelos" styleClass="titulo-seccion"/>
+
+    <TableView fx:id="modelosTable" VBox.vgrow="ALWAYS">
+        <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+        </columnResizePolicy>
+        <columns>
+            <TableColumn text="ID" fx:id="colId"/>
+            <TableColumn text="Marca" fx:id="colMarca"/>
+            <TableColumn text="Modelo" fx:id="colModelo"/>
+            <TableColumn text="Año" fx:id="colAno"/>
+            <TableColumn text="Combustible" fx:id="colCombustible"/>
+        </columns>
+    </TableView>
+
+    <HBox spacing="8" alignment="CENTER_LEFT">
+        <Button text="Nuevo" styleClass="btn-primary" onAction="#onNuevo"/>
+        <Button fx:id="editarBtn" text="Editar" styleClass="btn-action" onAction="#onEditar"/>
+        <Button fx:id="eliminarBtn" text="Eliminar" styleClass="btn-danger" onAction="#onEliminar"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button text="Cerrar" onAction="#onCerrar"/>
+    </HBox>
+</VBox>

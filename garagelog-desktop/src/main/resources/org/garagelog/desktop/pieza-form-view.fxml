@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox stylesheets="@styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="org.garagelog.desktop.controller.PiezaFormController"
+      spacing="12" minWidth="380" prefWidth="420" prefHeight="280" minHeight="260">
+    <padding>
+        <Insets top="15" right="15" bottom="15" left="15"/>
+    </padding>
+
+    <Label fx:id="tituloLabel" text="Nueva Pieza" styleClass="titulo-seccion"/>
+
+    <GridPane hgap="8" vgap="8">
+        <columnConstraints>
+            <ColumnConstraints minWidth="90" halignment="RIGHT"/>
+            <ColumnConstraints hgrow="ALWAYS" minWidth="200"/>
+        </columnConstraints>
+
+        <Label text="Nombre" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+        <TextField fx:id="nombreField" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+        <Label text="Descripción" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+        <TextArea fx:id="descripcionArea" prefRowCount="3" maxWidth="Infinity"
+                  GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+        <Label text="Precio" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+        <TextField fx:id="precioField" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+    </GridPane>
+
+    <HBox spacing="10" alignment="CENTER_RIGHT">
+        <Button text="Guardar" styleClass="btn-primary" onAction="#onGuardar"/>
+        <Button text="Cancelar" onAction="#onCancelar"/>
+    </HBox>
+</VBox>

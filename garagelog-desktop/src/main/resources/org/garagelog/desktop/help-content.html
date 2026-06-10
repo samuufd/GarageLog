@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<style>
+  body { font-family: 'Segoe UI', Arial, sans-serif; margin: 20px; color: #333; line-height: 1.6; }
+  h1 { color: #1a5276; font-size: 22px; border-bottom: 2px solid #2980b9; padding-bottom: 6px; }
+  h2 { color: #2c3e50; font-size: 18px; margin-top: 20px; }
+  h3 { color: #34495e; font-size: 15px; margin-top: 14px; }
+  p { margin: 6px 0; }
+  ul { margin: 4px 0 4px 20px; }
+  li { margin: 3px 0; }
+  ol { margin: 4px 0 4px 20px; }
+  ol li { margin: 3px 0; }
+  code { background: #f4f4f4; padding: 1px 5px; border-radius: 3px; font-size: 13px; }
+  .note { background: #eaf2f8; border-left: 4px solid #2980b9; padding: 8px 12px; margin: 10px 0; border-radius: 3px; }
+  .warning { background: #fef9e7; border-left: 4px solid #f39c12; padding: 8px 12px; margin: 10px 0; border-radius: 3px; }
+  .tip { background: #e8f8f5; border-left: 4px solid #1abc9c; padding: 8px 12px; margin: 10px 0; border-radius: 3px; }
+  .section { display: none; }
+  .section.active { display: block; }
+</style>
+</head>
+<body>
+
+<div id="introduccion" class="section active">
+<h1>Introducción</h1>
+<p>GarageLog Desktop es una aplicación de escritorio para la gestión integral de un taller o garaje. Permite administrar vehículos, modelos de vehículos, piezas y mantenimientos de forma sencilla y eficiente.</p>
+<p>La aplicación se conecta a un servidor backend que almacena los datos en una base de datos MySQL, garantizando la persistencia y seguridad de la información.</p>
+<h2>Requisitos del sistema</h2>
+<ul>
+  <li>Sistema operativo: Windows 10 o superior</li>
+  <li>Java Runtime Environment (JRE) 17 o superior</li>
+  <li>Servidor backend Spring Boot en ejecución (accesible en <code>http://localhost:8080</code>)</li>
+  <li>Base de datos MySQL</li>
+</ul>
+<h2>Estructura de la aplicación</h2>
+<p>La aplicación está organizada en los siguientes módulos principales:</p>
+<ul>
+  <li><strong>Vehículos</strong>: pantalla principal con el listado completo de vehículos registrados</li>
+  <li><strong>Modelos</strong>: gestión de marcas, modelos y especificaciones técnicas</li>
+  <li><strong>Piezas</strong>: catálogo de piezas y recambios disponibles</li>
+  <li><strong>Mantenimientos</strong>: registro de operaciones de mantenimiento para cada vehículo</li>
+</ul>
+</div>
+
+<div id="vehiculos" class="section">
+<h1>Módulo Vehículos</h1>
+<p>La pantalla principal de la aplicación muestra el listado completo de vehículos registrados en el sistema. Desde aquí se pueden realizar todas las operaciones CRUD.</p>
+<p>La tabla de vehículos muestra los siguientes datos:</p>
+<ul>
+  <li><strong>ID</strong>: identificador único del vehículo</li>
+  <li><strong>Matrícula</strong>: número de matrícula del vehículo</li>
+  <li><strong>Modelo</strong>: marca y modelo del vehículo</li>
+  <li><strong>KM Iniciales</strong>: kilometraje inicial registrado</li>
+  <li><strong>Fecha Compra</strong>: fecha de adquisición del vehículo</li>
+</ul>
+<p>Para actualizar el listado manualmente, pulsa el botón <strong>Refrescar</strong>.</p>
+</div>
+
+<div id="vehiculos-crear" class="section">
+<h1>Crear un vehículo</h1>
+<ol>
+  <li>Pulsa el botón <strong>Nuevo Vehículo</strong> en la pantalla principal</li>
+  <li>Selecciona un <strong>Modelo</strong> del desplegable (debe existir previamente en el catálogo de modelos)</li>
+  <li>Introduce la <strong>Matrícula</strong> del vehículo</li>
+  <li>Introduce los <strong>KM Iniciales</strong></li>
+  <li>Selecciona la <strong>Fecha de Compra</strong></li>
+  <li>Añade cualquier <strong>Nota</strong> adicional (opcional)</li>
+  <li>Pulsa <strong>Guardar</strong> para registrar el vehículo</li>
+</ol>
+<div class="tip">Asegúrate de que el modelo ya exista en el catálogo. Si no está, créalo desde <strong>Gestión Modelos</strong> antes de registrar el vehículo.</div>
+</div>
+
+<div id="vehiculos-editar" class="section">
+<h1>Editar un vehículo</h1>
+<ol>
+  <li>Selecciona el vehículo en la tabla principal</li>
+  <li>Pulsa el botón <strong>Editar Vehículo</strong></li>
+  <li>Modifica los campos necesarios en el formulario</li>
+  <li>Pulsa <strong>Guardar</strong> para confirmar los cambios</li>
+</ol>
+</div>
+
+<div id="vehiculos-eliminar" class="section">
+<h1>Eliminar un vehículo</h1>
+<ol>
+  <li>Selecciona el vehículo en la tabla principal</li>
+  <li>Pulsa el botón <strong>Eliminar Vehículo</strong></li>
+  <li>Confirma la operación en el cuadro de diálogo</li>
+</ol>
+<div class="warning">Al eliminar un vehículo se eliminarán también todos sus mantenimientos asociados.</div>
+</div>
+
+<div id="modelos" class="section">
+<h1>Módulo Modelos de Vehículo</h1>
+<p>Este módulo permite gestionar el catálogo de modelos de vehículos. Los modelos se utilizan al crear o editar un vehículo.</p>
+<p><strong>Acceso:</strong> Desde la pantalla principal, pulsa <strong>Gestión Modelos</strong> en la barra inferior.</p>
+<h2>Campos del formulario</h2>
+<ul>
+  <li><strong>Marca</strong>: fabricante del vehículo (obligatorio)</li>
+  <li><strong>Modelo</strong>: nombre del modelo específico (obligatorio)</li>
+  <li><strong>Año</strong>: año de fabricación o lanzamiento</li>
+  <li><strong>Combustible</strong>: tipo de combustible (Gasolina, Diésel, Híbrido, Eléctrico, GLP)</li>
+</ul>
+</div>
+
+<div id="modelos-crear" class="section">
+<h1>Crear un modelo</h1>
+<ol>
+  <li>Pulsa <strong>Nuevo</strong> en la ventana de Gestión de Modelos</li>
+  <li>Rellena los campos del formulario</li>
+  <li>Pulsa <strong>Guardar</strong></li>
+</ol>
+</div>
+
+<div id="modelos-editar" class="section">
+<h1>Editar un modelo</h1>
+<ol>
+  <li>Selecciona un modelo en la tabla</li>
+  <li>Pulsa <strong>Editar</strong></li>
+  <li>Modifica los campos y pulsa <strong>Guardar</strong></li>
+</ol>
+</div>
+
+<div id="modelos-eliminar" class="section">
+<h1>Eliminar un modelo</h1>
+<ol>
+  <li>Selecciona un modelo en la tabla</li>
+  <li>Pulsa <strong>Eliminar</strong></li>
+  <li>Confirma la eliminación</li>
+</ol>
+<div class="warning">No se puede eliminar un modelo que tenga vehículos asociados.</div>
+</div>
+
+<div id="piezas" class="section">
+<h1>Módulo Piezas</h1>
+<p>Este módulo gestiona el catálogo de piezas y recambios disponibles en el taller. Las piezas se utilizan al registrar mantenimientos.</p>
+<p><strong>Acceso:</strong> Desde la pantalla principal, pulsa <strong>Gestión Piezas</strong> en la barra inferior.</p>
+<h2>Campos del formulario</h2>
+<ul>
+  <li><strong>Nombre</strong>: nombre descriptivo de la pieza (obligatorio)</li>
+  <li><strong>Descripción</strong>: información adicional sobre la pieza</li>
+  <li><strong>Precio</strong>: precio unitario de la pieza (obligatorio)</li>
+</ul>
+</div>
+
+<div id="piezas-crear" class="section">
+<h1>Crear una pieza</h1>
+<ol>
+  <li>Pulsa <strong>Nuevo</strong> en la ventana de Gestión de Piezas</li>
+  <li>Rellena los campos del formulario</li>
+  <li>Pulsa <strong>Guardar</strong></li>
+</ol>
+</div>
+
+<div id="piezas-editar" class="section">
+<h1>Editar una pieza</h1>
+<ol>
+  <li>Selecciona una pieza en la tabla</li>
+  <li>Pulsa <strong>Editar</strong></li>
+  <li>Modifica los campos y pulsa <strong>Guardar</strong></li>
+</ol>
+</div>
+
+<div id="piezas-eliminar" class="section">
+<h1>Eliminar una pieza</h1>
+<ol>
+  <li>Selecciona una pieza en la tabla</li>
+  <li>Pulsa <strong>Eliminar</strong></li>
+  <li>Confirma la eliminación</li>
+</ol>
+</div>
+
+<div id="mantenimientos" class="section">
+<h1>Módulo Mantenimientos</h1>
+<p>Este módulo permite registrar y consultar las operaciones de mantenimiento realizadas a cada vehículo, incluyendo las piezas utilizadas.</p>
+<p><strong>Acceso:</strong></p>
+<ol>
+  <li>Selecciona un vehículo en la tabla principal</li>
+  <li>Pulsa el botón <strong>Ver Mantenimientos</strong></li>
+</ol>
+<h2>Ventana de mantenimientos</h2>
+<p>La ventana se divide en dos paneles:</p>
+<ul>
+  <li><strong>Panel superior</strong>: lista de mantenimientos del vehículo seleccionado</li>
+  <li><strong>Panel inferior</strong>: piezas utilizadas en el mantenimiento seleccionado</li>
+</ul>
+<p>Al seleccionar un mantenimiento en la tabla superior, las piezas asociadas se muestran automáticamente en la tabla inferior.</p>
+</div>
+
+<div id="mantenimientos-crear" class="section">
+<h1>Crear un mantenimiento</h1>
+<ol>
+  <li>Pulsa <strong>Nuevo Mantenimiento</strong></li>
+  <li>Selecciona la <strong>Fecha</strong> del mantenimiento</li>
+  <li>Introduce los <strong>KM</strong> actuales del vehículo</li>
+  <li>Indica el <strong>Coste Total</strong> (opcional)</li>
+  <li>Añade <strong>Observaciones</strong> si es necesario</li>
+  <li>En la sección <strong>Piezas</strong>, selecciona las piezas utilizadas:
+    <ul>
+      <li>Elige una pieza del desplegable</li>
+      <li>Indica la cantidad y el precio unitario</li>
+      <li>Pulsa <strong>Agregar</strong> para añadirla a la lista</li>
+    </ul>
+  </li>
+  <li>Pulsa <strong>Guardar</strong> para registrar el mantenimiento</li>
+</ol>
+<div class="tip">El precio unitario se rellena automáticamente al seleccionar una pieza, pero puedes modificarlo si el precio real difiere del catálogo.</div>
+</div>
+
+<div id="mantenimientos-eliminar" class="section">
+<h1>Eliminar un mantenimiento</h1>
+<ol>
+  <li>Selecciona el mantenimiento en la tabla superior</li>
+  <li>Pulsa <strong>Eliminar Mantenimiento</strong></li>
+  <li>Confirma la eliminación</li>
+</ol>
+</div>
+
+<div id="consejos" class="section">
+<h1>Consejos de uso</h1>
+<div class="tip">
+<h3>Antes de crear un vehículo</h3>
+<p>Asegúrate de que el modelo del vehículo ya existe en el catálogo de modelos. De lo contrario, créalo primero desde <strong>Gestión Modelos</strong>.</p>
+</div>
+<div class="tip">
+<h3>Precio de piezas en mantenimientos</h3>
+<p>Al seleccionar una pieza en el formulario de mantenimiento, el precio se autocompleta con el valor del catálogo. Si el proveedor aplicó un precio distinto, puedes ajustarlo manualmente.</p>
+</div>
+<div class="tip">
+<h3>Mantenimientos periódicos</h3>
+<p>Revisa regularmente el kilometraje de los vehículos para planificar los mantenimientos según las recomendaciones del fabricante.</p>
+</div>
+<div class="tip">
+<h3>Datos consistentes</h3>
+<p>Mantén actualizado el catálogo de modelos y piezas. Un catálogo bien organizado facilita el registro de vehículos y mantenimientos.</p>
+</div>
+<div class="tip">
+<h3>Refrescar datos</h3>
+<p>Si trabajas con varios usuarios simultáneamente, usa el botón <strong>Refrescar</strong> para asegurarte de ver los datos más recientes.</p>
+</div>
+</div>
+
+<div id="errores" class="section">
+<h1>Errores comunes y soluciones</h1>
+
+<h2>Error de conexión con el servidor</h2>
+<p><strong>Síntoma:</strong> Mensaje de error al iniciar o al realizar operaciones indicando que no se puede conectar con el servidor.</p>
+<p><strong>Solución:</strong></p>
+<ol>
+  <li>Verifica que el servidor backend esté en ejecución</li>
+  <li>Asegúrate de que el backend se esté ejecutando en <code>http://localhost:8080</code></li>
+  <li>Comprueba que no haya un cortafuegos bloqueando la conexión</li>
+  <li>Reinicia el servidor backend si es necesario</li>
+</ol>
+
+<h2>Error al guardar un modelo</h2>
+<p><strong>Síntoma:</strong> Al crear o editar un modelo, aparece un error del servidor.</p>
+<p><strong>Solución:</strong></p>
+<ul>
+  <li>Verifica que los campos obligatorios (marca y modelo) no estén vacíos</li>
+  <li>Comprueba que el año sea un número válido</li>
+  <li>Asegúrate de que el servidor backend esté funcionando correctamente</li>
+</ul>
+
+<h2>Error al guardar un mantenimiento</h2>
+<p><strong>Síntoma:</strong> El mantenimiento no se guarda y aparece un error.</p>
+<p><strong>Solución:</strong></p>
+<ul>
+  <li>Verifica que la fecha esté seleccionada</li>
+  <li>Comprueba que los KM sean un número válido</li>
+  <li>Asegúrate de que el vehículo asociado exista en la base de datos</li>
+</ul>
+
+<h2>La tabla no muestra datos</h2>
+<p><strong>Síntoma:</strong> Una tabla aparece vacía cuando debería mostrar registros.</p>
+<p><strong>Solución:</strong></p>
+<ul>
+  <li>Pulsa el botón <strong>Refrescar</strong> para recargar los datos</li>
+  <li>Verifica que el servidor backend esté ejecutándose</li>
+  <li>Comprueba que la base de datos contenga registros</li>
+</ul>
+
+<h2>Error al eliminar un modelo</h2>
+<p><strong>Síntoma:</strong> No se puede eliminar un modelo.</p>
+<p><strong>Solución:</strong> Solo se pueden eliminar modelos que no tengan vehículos asociados. Elimina primero los vehículos que usan ese modelo o asígnales otro modelo diferente.</p>
+
+<h2>La aplicación no inicia</h2>
+<p><strong>Síntoma:</strong> Al ejecutar la aplicación, esta no se abre o muestra un error de Java.</p>
+<p><strong>Solución:</strong></p>
+<ul>
+  <li>Verifica que Java 17 o superior esté instalado: <code>java -version</code></li>
+  <li>Asegúrate de que el archivo JAR no esté dañado</li>
+  <li>Ejecuta la aplicación desde la terminal para ver los mensajes de error detallados</li>
+</ul>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox stylesheets="@styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="org.garagelog.desktop.controller.MainController"
+      spacing="10" minWidth="640" minHeight="400">
+
+    <MenuBar>
+        <Menu text="Ayuda">
+            <MenuItem text="Ayuda" onAction="#onAyuda"/>
+            <MenuItem text="Acerca de" onAction="#onAcercaDe"/>
+        </Menu>
+    </MenuBar>
+
+    <VBox spacing="10" VBox.vgrow="ALWAYS">
+        <padding>
+            <Insets top="5" right="15" bottom="15" left="15"/>
+        </padding>
+
+        <Label text="GarageLog Desktop" styleClass="titulo-principal"/>
+
+        <TableView fx:id="vehiculosTable" VBox.vgrow="ALWAYS">
+            <columnResizePolicy>
+                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+            </columnResizePolicy>
+            <columns>
+                <TableColumn text="ID" fx:id="colId"/>
+                <TableColumn text="Matrícula" fx:id="colMatricula"/>
+                <TableColumn text="Modelo" fx:id="colModelo"/>
+                <TableColumn text="KM Iniciales" fx:id="colKm"/>
+                <TableColumn text="Fecha Compra" fx:id="colFecha"/>
+            </columns>
+        </TableView>
+
+        <Label text="Vehículos" styleClass="subtitulo"/>
+        <HBox spacing="8" alignment="CENTER_LEFT">
+            <Button text="Nuevo" styleClass="btn-primary" onAction="#onNuevoVehiculo"/>
+            <Button fx:id="editarBtn" text="Editar" styleClass="btn-action" onAction="#onEditarVehiculo"/>
+            <Button fx:id="eliminarBtn" text="Eliminar" styleClass="btn-danger" onAction="#onEliminarVehiculo"/>
+            <Separator orientation="VERTICAL"/>
+            <Button fx:id="mantenimientosBtn" text="Ver Mantenimientos" styleClass="btn-action" onAction="#onVerMantenimientos"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button text="Refrescar" onAction="#onRefrescar"/>
+        </HBox>
+
+        <Label text="Gestión" styleClass="subtitulo"/>
+        <HBox spacing="8" alignment="CENTER_LEFT">
+            <Button text="Gestión Modelos" styleClass="btn-action" onAction="#onVerModelos"/>
+            <Button text="Gestión Piezas" styleClass="btn-action" onAction="#onVerPiezas"/>
+        </HBox>
+    </VBox>
+</VBox>
