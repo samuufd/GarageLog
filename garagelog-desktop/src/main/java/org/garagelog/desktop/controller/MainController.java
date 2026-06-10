@@ -9,6 +9,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.garagelog.desktop.api.ApiClient;
@@ -26,9 +28,19 @@ public class MainController {
     @FXML private Button editarBtn;
     @FXML private Button eliminarBtn;
     @FXML private Button mantenimientosBtn;
+    @FXML private VBox detallePanel;
+    @FXML private VBox detallePlaceholder;
+    @FXML private VBox detalleContenido;
+    @FXML private ImageView detalleImagen;
+    @FXML private Label detalleMatricula;
+    @FXML private Label detalleModelo;
+    @FXML private Label detalleKm;
+    @FXML private Label detalleFecha;
+    @FXML private Label detalleNotas;
 
     private final ApiClient api = new ApiClient();
     private final ObservableList<Vehiculo> vehiculos = FXCollections.observableArrayList();
+    private final Image noImage = new Image(getClass().getResourceAsStream("/org/garagelog/desktop/no-image.jpg"));
 
     @FXML
     public void initialize() {
@@ -50,7 +62,48 @@ public class MainController {
         eliminarBtn.disableProperty().bind(sel.isNull());
         mantenimientosBtn.disableProperty().bind(sel.isNull());
 
+        sel.addListener((obs, old, v) -> {
+            if (v != null) {
+                mostrarDetalle(v);
+            } else {
+                mostrarPlaceholder();
+            }
+        });
+        mostrarPlaceholder();
+
         cargarVehiculos();
+    }
+
+    private void mostrarDetalle(Vehiculo v) {
+        detalleMatricula.setText(v.getMatricula());
+        ModeloVehiculo mv = v.getModeloVehiculo();
+        detalleModelo.setText(mv != null ? mv.getMarca() + " " + mv.getModelo() : "-");
+        detalleKm.setText(v.getKmIniciales() + " km");
+        detalleFecha.setText(v.getFechaCompra());
+        detalleNotas.setText(v.getNotas() != null && !v.getNotas().isBlank() ? v.getNotas() : "—");
+
+        if (mv != null && mv.getRutaImagen() != null && !mv.getRutaImagen().isBlank()) {
+            String url = ApiClient.BASE_URL + "/imagenes/" + mv.getRutaImagen();
+            Image img = new Image(url, 230, 160, true, true, true);
+            img.errorProperty().addListener((o, oldErr, hasErr) -> {
+                if (hasErr) detalleImagen.setImage(noImage);
+            });
+            detalleImagen.setImage(img);
+        } else {
+            detalleImagen.setImage(noImage);
+        }
+        detallePlaceholder.setVisible(false);
+        detallePlaceholder.setManaged(false);
+        detalleContenido.setVisible(true);
+        detalleContenido.setManaged(true);
+    }
+
+    private void mostrarPlaceholder() {
+        detalleImagen.setImage(noImage);
+        detalleContenido.setVisible(false);
+        detalleContenido.setManaged(false);
+        detallePlaceholder.setVisible(true);
+        detallePlaceholder.setManaged(true);
     }
 
     private void cargarVehiculos() {

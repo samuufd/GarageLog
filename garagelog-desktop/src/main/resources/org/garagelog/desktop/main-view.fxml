@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
 
@@ -15,41 +16,89 @@
         </Menu>
     </MenuBar>
 
-    <VBox spacing="10" VBox.vgrow="ALWAYS">
+    <HBox spacing="10" VBox.vgrow="ALWAYS">
         <padding>
             <Insets top="5" right="15" bottom="15" left="15"/>
         </padding>
 
-        <Label text="GarageLog Desktop" styleClass="titulo-principal"/>
+        <VBox spacing="10" HBox.hgrow="ALWAYS">
+            <Label text="GarageLog Desktop" styleClass="titulo-principal"/>
 
-        <TableView fx:id="vehiculosTable" VBox.vgrow="ALWAYS">
-            <columnResizePolicy>
-                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
-            </columnResizePolicy>
-            <columns>
-                <TableColumn text="ID" fx:id="colId"/>
-                <TableColumn text="Matrícula" fx:id="colMatricula"/>
-                <TableColumn text="Modelo" fx:id="colModelo"/>
-                <TableColumn text="KM Iniciales" fx:id="colKm"/>
-                <TableColumn text="Fecha Compra" fx:id="colFecha"/>
-            </columns>
-        </TableView>
+            <TableView fx:id="vehiculosTable" VBox.vgrow="ALWAYS">
+                <columnResizePolicy>
+                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+                </columnResizePolicy>
+                <columns>
+                    <TableColumn text="ID" fx:id="colId"/>
+                    <TableColumn text="Matrícula" fx:id="colMatricula"/>
+                    <TableColumn text="Modelo" fx:id="colModelo"/>
+                    <TableColumn text="KM Iniciales" fx:id="colKm"/>
+                    <TableColumn text="Fecha Compra" fx:id="colFecha"/>
+                </columns>
+            </TableView>
 
-        <Label text="Vehículos" styleClass="subtitulo"/>
-        <HBox spacing="8" alignment="CENTER_LEFT">
-            <Button text="Nuevo" styleClass="btn-primary" onAction="#onNuevoVehiculo"/>
-            <Button fx:id="editarBtn" text="Editar" styleClass="btn-action" onAction="#onEditarVehiculo"/>
-            <Button fx:id="eliminarBtn" text="Eliminar" styleClass="btn-danger" onAction="#onEliminarVehiculo"/>
-            <Separator orientation="VERTICAL"/>
-            <Button fx:id="mantenimientosBtn" text="Ver Mantenimientos" styleClass="btn-action" onAction="#onVerMantenimientos"/>
-            <Region HBox.hgrow="ALWAYS"/>
-            <Button text="Refrescar" onAction="#onRefrescar"/>
-        </HBox>
+            <Label text="Vehículos" styleClass="subtitulo"/>
+            <HBox spacing="8" alignment="CENTER_LEFT">
+                <Button text="Nuevo" styleClass="btn-primary" onAction="#onNuevoVehiculo"/>
+                <Button fx:id="editarBtn" text="Editar" styleClass="btn-action" onAction="#onEditarVehiculo"/>
+                <Button fx:id="eliminarBtn" text="Eliminar" styleClass="btn-danger" onAction="#onEliminarVehiculo"/>
+                <Separator orientation="VERTICAL"/>
+                <Button fx:id="mantenimientosBtn" text="Ver Mantenimientos" styleClass="btn-action" onAction="#onVerMantenimientos"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Button text="Refrescar" onAction="#onRefrescar"/>
+            </HBox>
 
-        <Label text="Gestión" styleClass="subtitulo"/>
-        <HBox spacing="8" alignment="CENTER_LEFT">
-            <Button text="Gestión Modelos" styleClass="btn-action" onAction="#onVerModelos"/>
-            <Button text="Gestión Piezas" styleClass="btn-action" onAction="#onVerPiezas"/>
-        </HBox>
-    </VBox>
+            <Label text="Gestión" styleClass="subtitulo"/>
+            <HBox spacing="8" alignment="CENTER_LEFT">
+                <Button text="Gestión Modelos" styleClass="btn-action" onAction="#onVerModelos"/>
+                <Button text="Gestión Piezas" styleClass="btn-action" onAction="#onVerPiezas"/>
+            </HBox>
+        </VBox>
+
+        <VBox fx:id="detallePanel" styleClass="detalle-panel" spacing="10" minWidth="240" prefWidth="260" maxWidth="300">
+            <padding>
+                <Insets top="12" right="12" bottom="12" left="12"/>
+            </padding>
+
+            <VBox fx:id="detallePlaceholder" spacing="6" VBox.vgrow="ALWAYS" alignment="CENTER">
+                <padding>
+                    <Insets top="10" right="10" bottom="10" left="10"/>
+                </padding>
+                <Label text="Selecciona un vehículo" styleClass="detalle-placeholder-titulo" textAlignment="CENTER"
+                       wrapText="true"/>
+                <Label text="Se mostrarán sus datos e imagen aquí" styleClass="detalle-placeholder-sub"
+                       textAlignment="CENTER" wrapText="true"/>
+            </VBox>
+
+            <VBox fx:id="detalleContenido" spacing="10" managed="false" visible="false">
+                <StackPane styleClass="detalle-imagen-marco" prefWidth="230" prefHeight="160" maxWidth="230" maxHeight="160">
+                    <ImageView fx:id="detalleImagen" fitWidth="230" fitHeight="160" preserveRatio="false"/>
+                </StackPane>
+                <Separator/>
+                <Label text="Información del vehículo" styleClass="subtitulo"/>
+                <VBox spacing="8">
+                    <VBox spacing="2">
+                        <Label text="Matrícula" styleClass="detalle-label"/>
+                        <Label fx:id="detalleMatricula" styleClass="detalle-valor"/>
+                    </VBox>
+                    <VBox spacing="2">
+                        <Label text="Modelo" styleClass="detalle-label"/>
+                        <Label fx:id="detalleModelo" styleClass="detalle-valor"/>
+                    </VBox>
+                    <VBox spacing="2">
+                        <Label text="KM" styleClass="detalle-label"/>
+                        <Label fx:id="detalleKm" styleClass="detalle-valor"/>
+                    </VBox>
+                    <VBox spacing="2">
+                        <Label text="Fecha de compra" styleClass="detalle-label"/>
+                        <Label fx:id="detalleFecha" styleClass="detalle-valor"/>
+                    </VBox>
+                    <VBox spacing="2">
+                        <Label text="Notas" styleClass="detalle-label"/>
+                        <Label fx:id="detalleNotas" styleClass="detalle-valor" wrapText="true"/>
+                    </VBox>
+                </VBox>
+            </VBox>
+        </VBox>
+    </HBox>
 </VBox>

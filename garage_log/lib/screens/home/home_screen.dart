@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter/services.dart' show SystemNavigator;
 import 'package:garage_log/core/theme/app_theme.dart';
 import 'package:garage_log/providers/theme_provider.dart';
 import 'package:garage_log/routes/routes_garagelog.dart';
@@ -12,30 +12,51 @@ class HomeScreen extends StatelessWidget {
 
   static bool _dialogShown = false;
 
+  String? _validateIp(String? value) {
+    if (value == null || value.trim().isEmpty) return 'La IP no puede estar vacía';
+    final parts = value.trim().split('.');
+    if (parts.length != 4) return 'Formato: 192.168.1.19';
+    for (final part in parts) {
+      final num = int.tryParse(part);
+      if (num == null) return 'Usar solo números';
+      if (num < 0 || num > 255) return 'Rango: 0-255';
+    }
+    return null;
+  }
+
   Future<void> _showServerConfigDialog(BuildContext context) async {
+    final formKey = GlobalKey<FormState>();
     final controller = TextEditingController(text: ServerConfig.ip);
     final result = await showDialog<String>(
       context: context,
       barrierDismissible: false,
       builder: (ctx) => AlertDialog(
+        insetPadding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
         title: const Text('Configurar servidor'),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const Text(
-              'Introduce la IP del servidor:',
-              style: TextStyle(fontSize: 14),
-            ),
-            const SizedBox(height: 12),
-            TextField(
-              controller: controller,
-              decoration: const InputDecoration(
-                hintText: '192.168.1.19',
-                labelText: 'Dirección IP',
+        contentPadding: const EdgeInsets.fromLTRB(24, 20, 24, 20),
+        content: Form(
+          key: formKey,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Text(
+                'Introduce la IP del servidor:',
+                style: TextStyle(fontSize: 14),
               ),
-              keyboardType: TextInputType.number,
-            ),
-          ],
+              const SizedBox(height: 12),
+              TextFormField(
+                controller: controller,
+                decoration: const InputDecoration(
+                  hintText: '192.168.1.19',
+                  labelText: 'Dirección IP',
+                  errorMaxLines: 2,
+                ),
+                keyboardType: TextInputType.number,
+                validator: _validateIp,
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+              ),
+            ],
+          ),
         ),
         actions: [
           TextButton(
@@ -44,9 +65,8 @@ class HomeScreen extends StatelessWidget {
           ),
           FilledButton(
             onPressed: () {
-              final ip = controller.text.trim();
-              if (ip.isNotEmpty) {
-                Navigator.of(ctx).pop(ip);
+              if (formKey.currentState!.validate()) {
+                Navigator.of(ctx).pop(controller.text.trim());
               }
             },
             child: const Text('Guardar'),

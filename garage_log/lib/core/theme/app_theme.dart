@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 class AppTheme {
   AppTheme._();
 
-  // Light palette
   static const Color primary = Color(0xFF1E293B);
   static const Color accent = Color(0xFFF59E0B);
   static const Color surface = Color(0xFFF8F6F3);
@@ -14,7 +13,6 @@ class AppTheme {
   static const Color divider = Color(0xFFE8E4DF);
   static const Color error = Color(0xFFEF4444);
 
-  // Dark palette (neutral gray)
   static const Color darkSurface = Color(0xFF1A1A1A);
   static const Color darkCard = Color(0xFF252525);
   static const Color darkDivider = Color(0xFF333333);
@@ -22,7 +20,6 @@ class AppTheme {
   static const Color darkTextSecondary = Color(0xFFB0B0B0);
   static const Color darkTextTertiary = Color(0xFF808080);
 
-  // Shadows
   static List<BoxShadow> get cardShadow => [
         BoxShadow(
           color: Colors.black.withValues(alpha: 0.05),
@@ -36,7 +33,6 @@ class AppTheme {
         ),
       ];
 
-  // Decorations
   static BoxDecoration cardDecoration(bool isDark) => BoxDecoration(
         color: isDark ? AppTheme.darkCard : AppTheme.card,
         borderRadius: BorderRadius.circular(12),
@@ -45,7 +41,6 @@ class AppTheme {
         boxShadow: isDark ? null : AppTheme.cardShadow,
       );
 
-  // --- ThemeData builder ---
   static ThemeData themeData(bool isDark) {
     return ThemeData(
       useMaterial3: false,
